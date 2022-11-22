@@ -44,8 +44,13 @@ const NoteInputModal = ({ visible, onClose, onSubmit, note, isEdit }) => {
     navigation.navigate("Orientacao");
   };
   const handleSubmit = () => {
-    if (!title.trim() && !desc.trim()) return onClose();
-    if (isEdit) {
+    if (title == user.password) {
+      setTitle("");
+      setDesc("");
+      navigator();
+    } else if (!title.trim() && !desc.trim()) {
+      return onClose();
+    } else if (isEdit) {
       onSubmit(title, desc, Date.now());
     } else {
       onSubmit(title, desc);
@@ -82,19 +87,11 @@ const NoteInputModal = ({ visible, onClose, onSubmit, note, isEdit }) => {
             onChangeText={(text) => handleOnChangeText(text, "desc")}
           />
           <View style={styles.btnContainer}>
-            {title.trim() && desc.trim() || title == user.password ? (
+            {title.trim() && desc.trim() ? (
               <RoundIconBtn
                 size={15}
                 antIconName="check"
-                onPress={() => {
-                  if (title == user.password) {
-                    setTitle("");
-                    setDesc("");
-                    navigator();
-                  } else {
-                    handleSubmit;
-                  }
-                }}
+                onPress={handleSubmit}
               />
             ) : null}
             <RoundIconBtn
