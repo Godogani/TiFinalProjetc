@@ -67,7 +67,7 @@ const NoteScreen = ({ user, navigation }) => {
       return await findNotes();
     }
     const filteredNotes = notes.filter((note) => {
-      if (note.title.toLowerCase().includes(text.toLowerCase())) {
+      if (note.title.toLowerCase().includes(text.toLowerCase())||note.desc.toLowerCase().includes(text.toLowerCase())) {
         return note;
       }
     });
